@@ -1,0 +1,2010 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>শুভ জন্মদিন, Rose! 🌹💗</title>
+  
+  <!-- Romantic & Bengali Web Fonts with clean fallbacks -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Hind+Siliguri:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       CSS VARIABLES & THEME SETUP
+       ========================================================================== */
+    :root {
+      --blush-pink: #FCE4EC;
+      --soft-pink: #FFF0F5;
+      --rose-red: #C72C58;
+      --deep-burgundy: #8E2348;
+      --antique-paper: #E8D3A9;
+      --warm-parchment: #F4E6C8;
+      --ink-brown: #5B3829;
+      --burnt-edge: #3D2925;
+      --char-black: #1E120F;
+      --warm-white: #FFF8F5;
+      --shadow-soft: 0 10px 30px rgba(142, 35, 72, 0.12);
+      --shadow-deep: 0 20px 45px rgba(61, 41, 37, 0.28);
+      --font-cursive: 'Dancing Script', 'Brush Script MT', cursive;
+      --font-serif: 'EB Garamond', Georgia, serif;
+      --font-bengali: 'Hind Siliguri', 'Kalpurush', 'SolaimanLipi', system-ui, sans-serif;
+      --font-title: 'Playfair Display', 'EB Garamond', Georgia, serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--soft-pink);
+    }
+
+    body {
+      width: 100%;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background: radial-gradient(circle at 50% 20%, #FFF5F8 0%, var(--blush-pink) 65%, #F8D7E3 100%);
+      color: var(--ink-brown);
+      font-family: var(--font-bengali);
+      line-height: 1.75;
+      position: relative;
+    }
+
+    /* Ambient Floating Particle Canvas */
+    #ambient-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Background Vignette */
+    .ambient-glow {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.4) 0%, rgba(199, 44, 88, 0.05) 80%, rgba(142, 35, 72, 0.12) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Confetti Canvas for Cake and Special Moments */
+    #confetti-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    /* ==========================================================================
+       TOP FLOATING MUSIC & AUDIO CONTROLLER
+       ========================================================================== */
+    .audio-control {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 8px 16px;
+      border-radius: 30px;
+      border: 1px solid rgba(199, 44, 88, 0.25);
+      box-shadow: 0 4px 15px rgba(199, 44, 88, 0.15);
+      cursor: pointer;
+      font-family: var(--font-bengali);
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--deep-burgundy);
+      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      user-select: none;
+    }
+
+    .audio-control:hover, .audio-control:focus-visible {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 6px 20px rgba(199, 44, 88, 0.25);
+      background: #ffffff;
+      outline: none;
+    }
+
+    .audio-control svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--rose-red);
+      transition: transform 0.3s ease;
+    }
+
+    .audio-control.playing svg {
+      animation: pulseMusic 1.4s infinite ease-in-out;
+    }
+
+    @keyframes pulseMusic {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    /* ==========================================================================
+       SECTION 1: SURPRISE OPENING SCREEN
+       ========================================================================== */
+    #opening-screen {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100vh;
+      background: radial-gradient(circle at center, #FFF4F8 0%, #FCE4EC 60%, #F5C6D6 100%);
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 24px;
+      transition: opacity 0.8s cubic-bezier(0.77, 0, 0.175, 1), transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+
+    #opening-screen.hidden {
+      opacity: 0;
+      transform: scale(1.05);
+      pointer-events: none;
+    }
+
+    .opening-card {
+      max-width: 480px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 42px 28px;
+      border-radius: 28px;
+      box-shadow: 0 20px 50px rgba(199, 44, 88, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.9);
+      animation: gentleFloat 4s ease-in-out infinite;
+      position: relative;
+    }
+
+    @keyframes gentleFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .opening-icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle, #FFE7EF 0%, #FFD0DF 100%);
+      border-radius: 50%;
+      box-shadow: 0 8px 20px rgba(199, 44, 88, 0.2);
+    }
+
+    .opening-icon svg {
+      width: 42px;
+      height: 42px;
+      fill: var(--rose-red);
+      filter: drop-shadow(0 2px 4px rgba(199, 44, 88, 0.2));
+    }
+
+    .opening-title {
+      font-family: var(--font-title);
+      font-size: clamp(2.2rem, 6vw, 3rem);
+      color: var(--deep-burgundy);
+      line-height: 1.2;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+
+    .opening-subtitle {
+      font-family: var(--font-serif);
+      font-size: clamp(1.15rem, 3.8vw, 1.35rem);
+      color: var(--rose-red);
+      margin-bottom: 8px;
+      font-weight: 500;
+      font-style: italic;
+    }
+
+    .opening-subtext {
+      font-size: clamp(0.95rem, 3.2vw, 1.05rem);
+      color: var(--ink-brown);
+      opacity: 0.88;
+      margin-bottom: 30px;
+    }
+
+    /* Common Button Design */
+    .btn-romantic {
+      background: linear-gradient(135deg, var(--rose-red) 0%, var(--deep-burgundy) 100%);
+      color: #ffffff;
+      border: none;
+      padding: 14px 34px;
+      font-size: 1.05rem;
+      font-family: var(--font-bengali);
+      font-weight: 600;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 8px 22px rgba(199, 44, 88, 0.35);
+      transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      outline: none;
+      user-select: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-romantic::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 40%;
+      height: 200%;
+      background: rgba(255, 255, 255, 0.28);
+      transform: rotate(30deg);
+      transition: all 0.75s ease;
+    }
+
+    .btn-romantic:hover::after {
+      left: 120%;
+    }
+
+    .btn-romantic:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 12px 28px rgba(199, 44, 88, 0.45);
+    }
+
+    .btn-romantic:active {
+      transform: translateY(1px) scale(0.98);
+    }
+
+    /* ==========================================================================
+       MAIN CONTENT CONTAINER
+       ========================================================================== */
+    #main-container {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 30px 18px 80px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    #main-container.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ==========================================================================
+       ONE-SECTION-AT-A-TIME PAGE NAVIGATION
+       ========================================================================== */
+    .page-section {
+      display: none !important;
+      width: 100%;
+      min-height: calc(100svh - 70px);
+      margin: 0 !important;
+      padding: 22px 0 18px;
+      animation: pageEnter 0.55s ease both;
+    }
+
+    .page-section.active {
+      display: flex !important;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    @keyframes pageEnter {
+      from { opacity: 0; transform: translateY(14px) scale(0.995); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .page-nav {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 28px auto 8px;
+      padding: 0 8px;
+    }
+
+    .page-nav button {
+      min-width: 132px;
+      border: 1px solid rgba(199, 44, 88, 0.22);
+      border-radius: 999px;
+      padding: 11px 20px;
+      background: rgba(255, 255, 255, 0.88);
+      color: var(--deep-burgundy);
+      font: 600 0.98rem var(--font-bengali);
+      box-shadow: 0 5px 16px rgba(199, 44, 88, 0.12);
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .page-nav button.primary {
+      color: #fff;
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--rose-red), var(--deep-burgundy));
+      box-shadow: 0 8px 20px rgba(199, 44, 88, 0.25);
+    }
+
+    .page-nav button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(199, 44, 88, 0.2);
+    }
+
+    .page-nav button:focus-visible {
+      outline: 3px solid rgba(199, 44, 88, 0.35);
+      outline-offset: 3px;
+    }
+
+    .page-counter {
+      flex-basis: 100%;
+      text-align: center;
+      color: var(--rose-red);
+      font-size: 0.82rem;
+      opacity: 0.82;
+      letter-spacing: 0.08em;
+    }
+
+    @media (max-width: 480px) {
+      .audio-control { top: 10px; right: 10px; padding: 7px 11px; font-size: .78rem; }
+      .opening-card { padding: 34px 22px; }
+      #main-container { padding: 16px 12px 28px; }
+      .page-section { min-height: calc(100svh - 40px); padding-top: 14px; }
+      .page-nav { gap: 8px; margin-top: 22px; }
+      .page-nav button { min-width: 120px; padding: 10px 15px; font-size: 0.92rem; }
+    }
+
+    /* ==========================================================================
+       SECTION 2: VINTAGE BURNT DIARY PAGE
+       ========================================================================== */
+    .diary-section {
+      margin-bottom: 70px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    /* Burnt Paper Outer Container */
+    .diary-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 760px;
+      margin: 0 auto;
+      perspective: 1000px;
+    }
+
+    /* Burnt Paper Base Layer with Charred Organic Edges */
+    .diary-paper {
+      position: relative;
+      background: #F2E3C6;
+      background-image: 
+        radial-gradient(circle at 15% 10%, rgba(255, 255, 255, 0.45) 0%, transparent 60%),
+        radial-gradient(circle at 85% 90%, rgba(142, 35, 72, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at 45% 55%, rgba(139, 69, 19, 0.03) 0%, transparent 80%);
+      color: var(--ink-brown);
+      padding: clamp(34px, 6vw, 65px) clamp(22px, 5vw, 55px);
+      border-radius: 6px;
+      box-shadow: 
+        0 1px 3px rgba(0, 0, 0, 0.1),
+        0 20px 40px rgba(61, 41, 37, 0.25),
+        0 0 120px rgba(199, 44, 88, 0.08);
+      font-size: clamp(1rem, 2.5vw, 1.14rem);
+      line-height: 1.95;
+      overflow: hidden;
+      border: 1px solid rgba(139, 69, 19, 0.2);
+    }
+
+    /* Burnt Charred Edge Effects via Pseudo Elements & Gradients */
+    .diary-paper::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: 
+        /* Top burnt edge */
+        linear-gradient(to bottom, rgba(30, 18, 15, 0.95) 0%, rgba(61, 41, 37, 0.75) 1.5%, rgba(142, 35, 72, 0.2) 3.5%, transparent 9%),
+        /* Bottom burnt edge */
+        linear-gradient(to top, rgba(30, 18, 15, 0.95) 0%, rgba(61, 41, 37, 0.8) 1.8%, rgba(142, 35, 72, 0.25) 4%, transparent 10%),
+        /* Left burnt edge */
+        linear-gradient(to right, rgba(30, 18, 15, 0.9) 0%, rgba(61, 41, 37, 0.6) 1.5%, transparent 7%),
+        /* Right burnt edge */
+        linear-gradient(to left, rgba(30, 18, 15, 0.9) 0%, rgba(61, 41, 37, 0.6) 1.5%, transparent 7%);
+      mix-blend-mode: multiply;
+      z-index: 2;
+    }
+
+    /* Scorched corners & vintage watermarks */
+    .diary-paper::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: 
+        radial-gradient(circle at 0% 0%, rgba(30, 18, 15, 0.95) 0%, rgba(91, 56, 41, 0.6) 5%, transparent 18%),
+        radial-gradient(circle at 100% 0%, rgba(30, 18, 15, 0.95) 0%, rgba(91, 56, 41, 0.6) 6%, transparent 18%),
+        radial-gradient(circle at 0% 100%, rgba(30, 18, 15, 0.95) 0%, rgba(91, 56, 41, 0.7) 7%, transparent 20%),
+        radial-gradient(circle at 100% 100%, rgba(30, 18, 15, 0.95) 0%, rgba(91, 56, 41, 0.7) 8%, transparent 22%),
+        radial-gradient(ellipse at 78% 28%, rgba(139, 69, 19, 0.06) 0%, transparent 14%),
+        radial-gradient(ellipse at 22% 72%, rgba(139, 69, 19, 0.05) 0%, transparent 12%);
+      z-index: 2;
+    }
+
+    /* Burnt Jagged Rim SVG Overlay */
+    .burnt-ragged-border {
+      position: absolute;
+      inset: -4px;
+      pointer-events: none;
+      z-index: 3;
+      border: 4px solid transparent;
+      box-shadow: inset 0 0 16px 6px rgba(35, 20, 16, 0.7);
+      border-radius: 6px;
+    }
+
+    /* Diary Header */
+    .diary-header {
+      text-align: center;
+      position: relative;
+      z-index: 4;
+      margin-bottom: 28px;
+      padding-bottom: 18px;
+      border-bottom: 1px dashed rgba(91, 56, 41, 0.35);
+    }
+
+    .diary-title {
+      font-family: var(--font-title);
+      font-size: clamp(1.8rem, 5.2vw, 2.5rem);
+      color: var(--deep-burgundy);
+      margin-bottom: 6px;
+      letter-spacing: -0.3px;
+    }
+
+    .diary-subtitle {
+      font-family: var(--font-serif);
+      font-size: clamp(0.95rem, 3.2vw, 1.15rem);
+      color: var(--rose-red);
+      font-style: italic;
+    }
+
+    .vintage-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 12px 0 0;
+      opacity: 0.7;
+    }
+
+    .vintage-divider span {
+      display: inline-block;
+      width: 45px;
+      height: 1px;
+      background: var(--rose-red);
+    }
+
+    .vintage-divider svg {
+      width: 16px;
+      height: 16px;
+      fill: var(--rose-red);
+    }
+
+    /* Diary Body & Text Formatting */
+    .diary-body {
+      position: relative;
+      z-index: 4;
+      font-family: var(--font-bengali);
+      font-weight: 400;
+    }
+
+    .diary-paragraph {
+      white-space: normal;
+      overflow-wrap: anywhere;
+      margin-bottom: 20px;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .diary-paragraph.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .diary-paragraph.lead-greeting {
+      font-size: clamp(1.15rem, 3.2vw, 1.35rem);
+      font-weight: 600;
+      color: var(--deep-burgundy);
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .diary-paragraph.highlight {
+      background: rgba(199, 44, 88, 0.05);
+      border-left: 3px solid var(--rose-red);
+      padding: 10px 14px;
+      border-radius: 0 8px 8px 0;
+      font-style: italic;
+    }
+
+    .diary-controls {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 26px;
+      position: relative;
+      z-index: 4;
+    }
+
+    .btn-skip {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(139, 69, 19, 0.35);
+      color: var(--ink-brown);
+      padding: 8px 18px;
+      font-size: 0.88rem;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: var(--font-bengali);
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .btn-skip:hover {
+      background: #ffffff;
+      color: var(--rose-red);
+      border-color: var(--rose-red);
+    }
+
+    /* ==========================================================================
+       SECTION 3: SECRET LETTER (ENVELOPE REVEAL)
+       ========================================================================== */
+    .secret-section {
+      margin-bottom: 80px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .secret-teaser {
+      margin-bottom: 28px;
+    }
+
+    .secret-title {
+      font-family: var(--font-title);
+      font-size: clamp(1.6rem, 4.5vw, 2.1rem);
+      color: var(--deep-burgundy);
+      margin-bottom: 6px;
+    }
+
+    .secret-sub {
+      font-family: var(--font-serif);
+      font-size: clamp(1.05rem, 3.2vw, 1.2rem);
+      color: var(--rose-red);
+      font-style: italic;
+    }
+
+    /* 3D Envelope Container */
+    .envelope-box {
+      position: relative;
+      width: min(340px, 90vw);
+      height: 220px;
+      margin: 20px auto 30px;
+      perspective: 1000px;
+    }
+
+    .envelope {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: #D9B382;
+      border-radius: 8px;
+      box-shadow: 0 15px 35px rgba(61, 41, 37, 0.22);
+      overflow: visible;
+      border: 1px solid #BF925A;
+    }
+
+    /* Envelope Flap Top */
+    .envelope-flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 170px solid transparent;
+      border-right: 170px solid transparent;
+      border-top: 120px solid #C49864;
+      transform-origin: top center;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 5;
+    }
+
+    @media (max-width: 380px) {
+      .envelope-flap {
+        border-left-width: 145px;
+        border-right-width: 145px;
+        border-top-width: 105px;
+      }
+    }
+
+    /* Envelope Front Pocket Layers */
+    .envelope-pocket {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 8px;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .envelope-pocket::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-bottom: 120px solid #CE9F6A;
+      border-right: min(340px, 90vw) solid transparent;
+    }
+
+    .envelope-pocket::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 0;
+      height: 0;
+      border-bottom: 120px solid #D2A470;
+      border-left: min(340px, 90vw) solid transparent;
+    }
+
+    /* Wax Seal */
+    .wax-seal {
+      position: absolute;
+      top: 85px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 48px;
+      height: 48px;
+      background: radial-gradient(circle at 35% 35%, #E23D69 0%, #9C1B40 70%, #680E28 100%);
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(110, 16, 44, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.35);
+      z-index: 6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.35s ease, opacity 0.4s ease;
+    }
+
+    .wax-seal:hover {
+      transform: translateX(-50%) scale(1.08);
+    }
+
+    .wax-seal svg {
+      width: 22px;
+      height: 22px;
+      fill: #ffffff;
+      opacity: 0.92;
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+    }
+
+    /* Secret Letter inside the envelope */
+    .secret-paper {
+      position: absolute;
+      top: 15px;
+      left: 5%;
+      width: 90%;
+      min-height: 180px;
+      background: #FFFDF9;
+      border-radius: 6px;
+      padding: 22px 18px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+      border: 1px solid #E5D5B8;
+      z-index: 2;
+      transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.5s ease;
+      color: var(--ink-brown);
+      font-family: var(--font-serif);
+      font-size: 1.02rem;
+      line-height: 1.7;
+      text-align: left;
+    }
+
+    /* Envelope Opened State */
+    .envelope-box.opened .envelope-flap {
+      transform: rotateX(180deg);
+      z-index: 1;
+    }
+
+    .envelope-box.opened .wax-seal {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(-50%) scale(0.6);
+    }
+
+    .envelope-box.opened .secret-paper {
+      transform: translateY(-90px);
+      z-index: 7;
+      box-shadow: 0 15px 35px rgba(61, 41, 37, 0.25);
+    }
+
+    /* Secret message full card view on mobile after unsealing */
+    .secret-revealed-text {
+      display: none;
+      max-width: 620px;
+      margin: 25px auto 0;
+      background: #FFFBF5;
+      padding: 28px 24px;
+      border-radius: 16px;
+      border: 1px solid rgba(199, 44, 88, 0.2);
+      box-shadow: var(--shadow-soft);
+      text-align: center;
+      font-family: var(--font-serif);
+      font-size: clamp(1.05rem, 3.2vw, 1.25rem);
+      line-height: 1.85;
+      color: var(--ink-brown);
+      animation: fadeInText 0.8s ease forwards;
+    }
+
+    .secret-revealed-text.active {
+      display: block;
+    }
+
+    @keyframes fadeInText {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ==========================================================================
+       FUNNY COMPLIMENT GENERATOR — DREAMY INTERACTIVE PAGE
+       ========================================================================== */
+    .compliment-section {
+      margin-bottom: 80px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .compliment-card {
+      width: min(620px, 100%);
+      padding: clamp(24px, 5vw, 42px);
+      border: 1px solid rgba(199, 44, 88, 0.18);
+      border-radius: 26px;
+      background: linear-gradient(145deg, rgba(255,255,255,.86), rgba(255,238,245,.8));
+      box-shadow: 0 18px 48px rgba(199, 44, 88, .13), inset 0 1px 0 rgba(255,255,255,.9);
+      backdrop-filter: blur(10px);
+    }
+
+    .compliment-title {
+      font-family: var(--font-title);
+      font-size: clamp(1.7rem, 5vw, 2.35rem);
+      color: var(--deep-burgundy);
+      margin-bottom: 8px;
+    }
+
+    .compliment-subtitle { color: var(--rose-red); margin-bottom: 20px; }
+
+    .compliment-message {
+      min-height: 100px;
+      display: grid;
+      place-items: center;
+      padding: 20px 12px;
+      color: var(--deep-burgundy);
+      font-size: clamp(1.12rem, 3.7vw, 1.4rem);
+      font-weight: 600;
+      line-height: 1.8;
+      text-wrap: balance;
+      transition: opacity .25s ease, transform .25s ease;
+    }
+
+    .compliment-message.pop { animation: complimentPop .42s ease both; }
+    @keyframes complimentPop {
+      0% { opacity: .25; transform: translateY(8px) scale(.98); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .compliment-hint { color: #8f596b; font-size: .9rem; margin-top: 10px; }
+
+    /* ==========================================================================
+       SECTION 4: INTERACTIVE BIRTHDAY CAKE
+       ========================================================================== */
+    .cake-section {
+      margin-bottom: 80px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .cake-title {
+      font-family: var(--font-title);
+      font-size: clamp(1.7rem, 4.8vw, 2.3rem);
+      color: var(--deep-burgundy);
+      margin-bottom: 6px;
+    }
+
+    .cake-subtitle {
+      font-size: 1.02rem;
+      color: var(--rose-red);
+      margin-bottom: 30px;
+      font-style: italic;
+    }
+
+    /* Cake Art SVG / CSS container */
+    .cake-display {
+      position: relative;
+      width: 240px;
+      height: 200px;
+      margin: 0 auto 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .cake-plate {
+      position: absolute;
+      bottom: 0;
+      width: 230px;
+      height: 18px;
+      background: #FFF2F6;
+      border-radius: 50%;
+      border: 2px solid rgba(199, 44, 88, 0.25);
+      box-shadow: 0 10px 22px rgba(142, 35, 72, 0.15);
+    }
+
+    .cake-layer-bottom {
+      width: 180px;
+      height: 65px;
+      background: linear-gradient(135deg, #FFB8CF 0%, #F48FB1 100%);
+      border-radius: 12px 12px 6px 6px;
+      position: relative;
+      margin-bottom: 6px;
+      box-shadow: inset 0 -6px 0 rgba(199, 44, 88, 0.18);
+    }
+
+    .cake-frosting-bottom {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 16px;
+      background: #FFFFFF;
+      border-radius: 10px 10px 16px 16px;
+      box-shadow: 0 3px 0 rgba(199, 44, 88, 0.15);
+    }
+
+    .cake-layer-top {
+      width: 130px;
+      height: 55px;
+      background: linear-gradient(135deg, #FF9BBF 0%, #EC407A 100%);
+      border-radius: 10px 10px 4px 4px;
+      position: relative;
+      box-shadow: inset 0 -5px 0 rgba(142, 35, 72, 0.2);
+    }
+
+    .cake-frosting-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 14px;
+      background: #FFFFFF;
+      border-radius: 10px 10px 14px 14px;
+      box-shadow: 0 3px 0 rgba(199, 44, 88, 0.15);
+    }
+
+    /* Candle & Candle Flame */
+    .candle {
+      position: relative;
+      width: 10px;
+      height: 34px;
+      background: repeating-linear-gradient(45deg, #FFF, #FFF 4px, #C72C58 4px, #C72C58 8px);
+      border-radius: 4px;
+      margin-bottom: 2px;
+    }
+
+    .candle-wick {
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 6px;
+      background: #333;
+    }
+
+    .flame {
+      position: absolute;
+      top: -24px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 14px;
+      height: 22px;
+      background: radial-gradient(ellipse at bottom, #FFF 0%, #FFEA79 30%, #FF9800 70%, #F44336 100%);
+      border-radius: 50% 50% 35% 35% / 60% 60% 40% 40%;
+      filter: drop-shadow(0 0 10px rgba(255, 179, 0, 0.9));
+      animation: flicker 1.2s infinite ease-in-out;
+      transform-origin: bottom center;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    @keyframes flicker {
+      0%, 100% { transform: translateX(-50%) rotate(-1deg) scale(1); }
+      25% { transform: translateX(-50%) rotate(2deg) scale(1.05); }
+      50% { transform: translateX(-50%) rotate(-2deg) scale(0.96); }
+      75% { transform: translateX(-50%) rotate(1.5deg) scale(1.03); }
+    }
+
+    .flame.extinguished {
+      opacity: 0;
+      transform: translateX(-50%) scale(0.1);
+    }
+
+    /* Smoke puff animation after blowing candle */
+    .smoke {
+      position: absolute;
+      top: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 8px;
+      height: 8px;
+      background: rgba(180, 180, 180, 0.6);
+      border-radius: 50%;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .smoke.puff {
+      animation: smokeRise 1.4s ease-out forwards;
+    }
+
+    @keyframes smokeRise {
+      0% { opacity: 0.8; transform: translateX(-50%) scale(1); }
+      50% { opacity: 0.4; transform: translate(-30%, -20px) scale(2.4); }
+      100% { opacity: 0; transform: translate(-10%, -40px) scale(3.5); }
+    }
+
+    .wish-blessing {
+      display: none;
+      margin-top: 18px;
+      font-family: var(--font-bengali);
+      font-size: clamp(1.15rem, 3.5vw, 1.35rem);
+      color: var(--deep-burgundy);
+      font-weight: 600;
+      animation: wishFade 0.9s ease forwards;
+    }
+
+    @keyframes wishFade {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ==========================================================================
+       SECTION 5: FINAL PAGE (SUBTLE FLIRTY ENDING)
+       ========================================================================== */
+    .final-section {
+      text-align: center;
+      padding: 60px 20px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .rose-art {
+      width: 88px;
+      height: 88px;
+      margin-bottom: 24px;
+      filter: drop-shadow(0 10px 18px rgba(199, 44, 88, 0.28));
+      animation: pulseRose 3.5s ease-in-out infinite;
+    }
+
+    @keyframes pulseRose {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.06); }
+    }
+
+    .final-title {
+      font-family: var(--font-title);
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
+      color: var(--deep-burgundy);
+      margin-bottom: 16px;
+    }
+
+    .final-body-text {
+      max-width: 580px;
+      font-size: clamp(1.05rem, 3.2vw, 1.25rem);
+      color: var(--ink-brown);
+      line-height: 1.85;
+      margin-bottom: 14px;
+    }
+
+    .final-flirty-text {
+      font-family: var(--font-serif);
+      font-size: clamp(1.15rem, 3.6vw, 1.35rem);
+      color: var(--rose-red);
+      font-style: italic;
+      margin-bottom: 24px;
+      font-weight: 500;
+    }
+
+    .final-birthday-tag {
+      font-family: var(--font-title);
+      font-size: clamp(1.5rem, 4.5vw, 2.1rem);
+      color: var(--deep-burgundy);
+      margin-bottom: 24px;
+    }
+
+    .final-signature {
+      font-family: var(--font-cursive);
+      font-size: clamp(1.35rem, 4vw, 1.65rem);
+      color: var(--ink-brown);
+      opacity: 0.9;
+      margin-bottom: 40px;
+    }
+
+    /* Footer Credits */
+    .footer-note {
+      font-size: 0.85rem;
+      color: rgba(91, 56, 41, 0.65);
+      margin-top: 50px;
+    }
+
+    /* Accessibility: prefers-reduced-motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Light Effect Layer -->
+  <div class="ambient-glow" aria-hidden="true"></div>
+
+  <!-- Background Particle Animation Canvas (Floating Hearts & Rose Petals) -->
+  <canvas id="ambient-canvas" aria-hidden="true"></canvas>
+
+  <!-- Confetti Canvas for Cake and Special Interactions -->
+  <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+  <!-- Interactive Music Control Button -->
+  <button id="audio-toggle" class="audio-control" aria-label="Turn background music on or off" title="Toggle music">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+    </svg>
+    <span id="audio-label">Play Music ♫</span>
+  </button>
+
+  <!-- ==========================================================================
+       SECTION 1: SURPRISE OPENING SCREEN
+       ========================================================================== -->
+  <div id="opening-screen" role="dialog" aria-modal="true" aria-label="Birthday Surprise Opening">
+    <div class="opening-card">
+      <div class="opening-icon" aria-hidden="true">
+        <!-- Elegant Inline SVG Rose Icon -->
+        <svg viewBox="0 0 24 24">
+          <path d="M12,2C10.89,2 10,2.89 10,4C10,4.28 10.06,4.54 10.16,4.78C8.89,5.28 8,6.54 8,8C8,8.28 8.04,8.54 8.11,8.79C6.88,9.37 6,10.59 6,12C6,13.93 7.57,15.5 9.5,15.5H10V18H7V20H10V22H14V20H17V18H14V15.5H14.5C16.43,15.5 18,13.93 18,12C18,10.59 17.12,9.37 15.89,8.79C15.96,8.54 16,8.28 16,8C16,6.54 15.11,5.28 13.84,4.78C13.94,4.54 14,4.28 14,4C14,2.89 13.11,2 12,2Z"/>
+        </svg>
+      </div>
+
+      <h1 class="opening-title">Hey, Rose! 🌹</h1>
+      <p class="opening-subtitle">Someone has a little surprise for you...</p>
+      <p class="opening-subtext">And no, it's not just another boring birthday wish. 👀</p>
+
+      <button id="btn-open-surprise" class="btn-romantic">
+        <span>Open Your Surprise 💌</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MAIN CONTAINER (VISIBLE AFTER OPENING)
+       ========================================================================== -->
+  <main id="main-container">
+
+    <!-- ========================================================================
+         SECTION 2: MAIN BIRTHDAY WISH — VINTAGE BURNT DIARY PAGE
+         ======================================================================== -->
+    <section class="diary-section" id="diary-section" aria-label="Birthday Diary Letter">
+      <div class="diary-wrapper">
+        <article class="diary-paper">
+          <div class="burnt-ragged-border" aria-hidden="true"></div>
+
+          <!-- Diary Header -->
+          <header class="diary-header">
+            <h2 class="diary-title">To My Favourite Rose... 🌹</h2>
+            <p class="diary-subtitle">A little birthday letter, written just for you.</p>
+            <div class="vintage-divider" aria-hidden="true">
+              <span></span>
+              <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              <span></span>
+            </div>
+          </header>
+
+          <!-- Complete Unmodified Birthday Message -->
+          <div class="diary-body" id="diary-body">
+            <p class="diary-paragraph lead-greeting">🌹🎂 Happy Birthday, Rose! 🎂🌹</p>
+
+            <p class="diary-paragraph">প্রথমেই একটা প্রশ্ন, তোমার নাম Rose কেন? মানে, পৃথিবীতে এত সুন্দর সুন্দর নাম থাকতে তোমার নামটাই Rose হতে হলো কেন? এখন তোমাকে Birthday Wish করতে এসেও নাম নিয়ে এত কিছু ভাবতে হচ্ছে! 😭 যাই হোক, আজকের দিনটা কিন্তু তোমার! 🥳💗 তাই তোমার জন্য অনেক অনেক শুভকামনা। তোমার জীবনের প্রতিটা দিন সুন্দর হোক, প্রতিটা স্বপ্ন পূরণ হোক, আর তোমার মুখের হাসিটা যেন সবসময় এমনই থাকে। জীবনে এমন সব মুহূর্ত আসুক, যেগুলো মনে পড়লে তোমার নিজেরই হাসি পাবে। আর এমন কিছু মানুষ থাকুক, যাদের উপস্থিতিতে তোমার মনটা ভালো হয়ে যাবে। ❤️
+আচ্ছা, Rose নিয়ে একটু কথা বলা যাক! গোলাপ ফুল সুন্দর, এটা তো সবাই জানে। কিন্তু গোলাপের একটা সমস্যা আছে, কিছু গোলাপ দেখলে মানুষ শুধু সৌন্দর্য দেখেই চলে যেতে পারে, আবার কিছু গোলাপ আছে, যেগুলো দেখার পর অকারণেই আরেকবার দেখতে ইচ্ছা করে। 🙂‍↕️😁 এখন সমস্যা হলো, তোমার নামটাও Rose, আর এই কথাগুলো লেখার সময় কেন জানি তোমার কথাই মনে পড়ছে! 🙂‍↔️😂 অবশ্যই এটা একটা সম্পূর্ণ স্বাভাবিক ব্যাপার। এর মধ্যে অন্য কোনো অর্থ খুঁজতে গেলে সেটা সম্পূর্ণ তোমার ব্যক্তিগত গবেষণার বিষয়! 🌚🤝 তবে একটা কথা মানতেই হবে, কিছু মানুষ আছে যাদের সঙ্গে খুব বেশি কথা না হলেও তাদের সম্পর্কে একটু কৌতূহল থেকেই যায়। তাদের সম্পর্কে খুব বেশি কিছু জানা নেই, তবুও মনে হয় আচ্ছা, মানুষটা আসলে কেমন? সবসময় কি এমনই থাকে, নাকি তারও একটা দুষ্টু আর মজার দিক আছে, যেটা সবাই দেখতে পায় না? 😒
+তোমাকে নিয়ে এমন কোনো গবেষণা চলছে কি না, সেটা অবশ্য এখনই বলা যাচ্ছে না। গবেষণার ফলাফল প্রকাশের জন্য আরও কিছু সময় প্রয়োজন! 😭😂
+আর শোনো, তোমার Birthday বলে একটা কথা বলার সুযোগ পাওয়া গেছে, তাই বলে ফেলি, তোমার নামের মতোই তোমার দিনগুলো সুন্দর হোক, আর তোমার জীবনে এমন কেউ আসুক, যে তোমার হাসির কারণ হওয়ার জন্য কোনো বিশেষ দিনের অপেক্ষা করবে না। 🥹❤️❤️ যদিও এমন কেউ ইতোমধ্যে আশেপাশে ঘোরাঘুরি করছে কি না, সেটা তোমারই ভালো জানার কথা! যাই হোক, বেশি Hint দিয়ে Birthday Wish-টাকে রহস্য উপন্যাস বানিয়ে ফেলতে চাই না। 😂 আজকে তোমার কাজ শুধু আনন্দ করা, Cake খাওয়া, ছবি তোলা আর নিজের Special Day-টা উপভোগ করা। আর এই ভিন্ন ভাবে শুধুমাত্র তোমার জন্য একটা নিজের তৈরি Website এর মাধ্যমে Wish পড়ে যদি একটু হাসো, তাহলে ধরে নেব আমার পরিশ্রম সার্থক হয়েছে! 🥹🤌
+
+Happy Birthday once again, Rose! 🌹
+
+তোমার জীবনটা হোক তোমার পছন্দের ফুলের মতো সুন্দর, তোমার হাসি হোক সকালের রোদের মতো উজ্জ্বল, আর তোমার প্রতিটা নতুন বছর নিয়ে আসুক নতুন আনন্দ, নতুন গল্প আর অনেক সুন্দর স্মৃতি। আর হ্যাঁ, একটা ছোট্ট কথা বলে রাখি সবাই তোমাকে Birthday Wish করবে, কেউ ফুল দেবে, কেউ Gift দেবে। কিন্তু সবাই যে তোমার নাম নিয়ে এতক্ষণ ধরে গবেষণা করে একটা Wish লিখবে, তার কোনো নিশ্চয়তা নেই! 🙂😂 তাই এই Wish-টা একটু আলাদা করে মনে রেখো। কে জানে, একদিন হয়তো এটা পড়ে তুমি হাসবে আর ভাববে, "আচ্ছা, এই মানুষটা আবার এমনভাবে Wish করেছিল কেন?" 🌚 সেই প্রশ্নের উত্তর আজকে না-ই বা জানলে!
+
+Have the most beautiful birthday, Rose. Stay happy, stay lovely, and keep blooming. 🌹❤️</p>
+
+            <p class="diary-paragraph lead-greeting" style="font-family: var(--font-title); font-size: 1.15rem;">Have the most beautiful birthday, Rose. Stay happy, stay lovely, and keep blooming. 🌹❤️✨</p>
+          </div>
+
+          <!-- Diary Controls -->
+          <div class="diary-controls">
+            <button id="btn-skip-diary" class="btn-skip" aria-label="Read Full Letter immediately">Read Full Letter ↓</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         SECTION 3: SECRET LETTER — FUNNY FLIRTY REVEAL
+         ======================================================================== -->
+    <section class="secret-section" aria-label="Secret Birthday Letter">
+      <div class="secret-teaser">
+        <h2 class="secret-title">Wait, Rose... 👀</h2>
+        <p class="secret-sub">There might be one tiny little secret left.</p>
+      </div>
+
+      <!-- Sealed Envelope -->
+      <div class="envelope-box" id="envelope-box">
+        <div class="envelope">
+          <div class="envelope-flap" id="envelope-flap"></div>
+          <div class="envelope-pocket"></div>
+          <div class="wax-seal" id="wax-seal" role="button" aria-label="Unseal the Letter" tabindex="0">
+            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          </div>
+          <div class="secret-paper" id="secret-paper" aria-hidden="true">
+            <p style="font-style: italic; color: var(--rose-red); font-weight: 600; margin-bottom: 6px;">To Rose,</p>
+            <p>Okay, Rose… this is getting a little suspicious. 🌹</p>
+          </div>
+        </div>
+      </div>
+
+      <button id="btn-unseal" class="btn-romantic">
+        <span>Unseal the Letter 💌</span>
+      </button>
+
+      <!-- Full Revealed Secret Message -->
+      <div class="secret-revealed-text" id="secret-revealed-text">
+        <p style="margin-bottom: 12px; font-size: 1.25rem; font-weight: 600; color: var(--deep-burgundy);">
+          Okay, Rose… this is getting a little suspicious. 🌹
+        </p>
+        <p style="margin-bottom: 12px;">
+          I was going to write a normal birthday wish, but somehow your name made this unnecessarily complicated. 😂
+        </p>
+        <p style="font-weight: 500; color: var(--rose-red);">
+          Anyway, if someone ever tells you that you're their favourite Rose, don't ask too many questions. Just saying. 👀❤️
+        </p>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         SECTION 4: FUNNY COMPLIMENT GENERATOR
+         ======================================================================== -->
+    <section class="compliment-section" id="compliment-section" aria-label="Funny Compliment Generator">
+      <div class="compliment-card">
+        <div aria-hidden="true" style="font-size:2.2rem; margin-bottom:8px;">🌹 ✨ 😼</div>
+        <h2 class="compliment-title">Birthday Privileges, Rose! 🎀</h2>
+        <p class="compliment-subtitle">Tap the button for unlimited birthday compliments—although some may be questionable. 😂</p>
+        <div class="compliment-message" id="compliment-message" aria-live="polite">Ready for your first scientifically questionable compliment? 👀</div>
+        <button id="btn-compliment" class="btn-romantic" type="button"><span>Give Me a Compliment 💗</span></button>
+        <p class="compliment-hint">Warning: This research has absolutely no scientific basis. 🌚</p>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         SECTION 5: INTERACTIVE BIRTHDAY CAKE
+         ======================================================================== -->
+    <section class="cake-section" aria-label="Birthday Cake Celebration">
+      <h2 class="cake-title">Make a Wish, Rose ✨</h2>
+      <p class="cake-subtitle">Take a deep breath and close your eyes...</p>
+
+      <div class="cake-display" aria-hidden="true">
+        <!-- Single Candle with Flame & Smoke puff -->
+        <div class="candle">
+          <div class="flame" id="candle-flame"></div>
+          <div class="candle-wick"></div>
+          <div class="smoke" id="candle-smoke"></div>
+        </div>
+
+        <!-- Tier 2 (Top) -->
+        <div class="cake-layer-top">
+          <div class="cake-frosting-top"></div>
+        </div>
+
+        <!-- Tier 1 (Bottom) -->
+        <div class="cake-layer-bottom">
+          <div class="cake-frosting-bottom"></div>
+        </div>
+
+        <!-- Cake Plate -->
+        <div class="cake-plate"></div>
+      </div>
+
+      <button id="btn-blow-candle" class="btn-romantic">
+        <span>মোমবাতি নিভিয়ে দাও 🎂</span>
+      </button>
+
+      <p class="wish-blessing" id="wish-blessing">
+        তোমার ছোট-বড় সব ইচ্ছা পূরণ হোক। 💗
+      </p>
+    </section>
+
+    <!-- ========================================================================
+         SECTION 6: FINAL PAGE — SUBTLE FLIRTY ENDING
+         ======================================================================== -->
+    <section class="final-section" id="final-section" aria-label="জন্মদিনের শুভেচ্ছার সমাপ্তি">
+      <!-- Detailed SVG Red Rose -->
+      <div class="rose-art" aria-hidden="true">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="48" fill="url(#roseGlow)" opacity="0.3"/>
+          <path d="M50 15C35 15 28 28 28 42C28 60 50 82 50 82C50 82 72 60 72 42C72 28 65 15 50 15Z" fill="url(#rosePetalGrad1)"/>
+          <path d="M50 25C40 25 35 34 35 44C35 56 50 72 50 72C50 72 65 56 65 44C65 34 60 25 50 25Z" fill="url(#rosePetalGrad2)"/>
+          <path d="M50 34C45 34 42 39 42 45C42 52 50 62 50 62C50 62 58 52 58 45C58 39 55 34 50 34Z" fill="url(#roseCore)"/>
+          <path d="M50 82C50 82 48 90 40 94M50 82C50 82 52 90 60 94" stroke="#4B7B43" stroke-width="4" stroke-linecap="round"/>
+          <defs>
+            <radialGradient id="roseGlow" cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0%" stop-color="#FF4081"/>
+              <stop offset="100%" stop-color="#FF4081" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="rosePetalGrad1" x1="50" y1="15" x2="50" y2="82" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#E91E63"/>
+              <stop offset="1" stop-color="#880E4F"/>
+            </linearGradient>
+            <linearGradient id="rosePetalGrad2" x1="50" y1="25" x2="50" y2="72" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#FF4081"/>
+              <stop offset="1" stop-color="#C2185B"/>
+            </linearGradient>
+            <linearGradient id="roseCore" x1="50" y1="34" x2="50" y2="62" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#FF80AB"/>
+              <stop offset="1" stop-color="#AD1457"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <h2 class="final-title">One Last Thing, Rose... 🌹</h2>
+
+      <p class="final-body-text">
+        Some people deserve flowers, some deserve birthday wishes, and some make you want to go a little extra. 👀🌹
+      </p>
+
+      <p class="final-flirty-text">
+        Guess which category you belong to? 😂❤️
+      </p>
+
+      <h3 class="final-birthday-tag">
+        Happy Birthday, Rose! 💗🌹
+      </h3>
+
+      <p class="final-signature">
+        Someone who thought your birthday deserved something different. 🌹
+      </p>
+
+      <button id="btn-final-secret" class="btn-romantic" type="button">
+        <span>One Last Little Secret… 🤫🌹</span>
+      </button>
+      <p id="final-secret-message" class="final-flirty-text" hidden style="margin: 18px auto 24px; max-width: 620px;">
+        আসল চমকটা জানো কী, Rose? 🌹🤫
+আসলে তোমার জন্মদিনে একটু অন্যরকম কিছু করতে ইচ্ছা হলো। ভাবলাম, সবাই তো উইশ করবে, আমিও না হয় একটু অন্যভাবে করি। তাই এই ছোট্ট ওয়েবসাইটটা বানানো। 💗 ভাবলাম, শুধু একটা মেসেজ দিয়ে Happy Birthday বলার চেয়ে এমন কিছু করি, যেটা দেখে তুমি একটু অবাক হবে, একটু হাসবে, আর হয়তো ভাববে, “এত কিছু করার কী দরকার ছিল!” 😂 তাই এই ওয়েবসাইট, গোপন চিঠি, গোলাপ, কেক আর এত এত Compliment-এর আয়োজন। যদিও Compliment-গুলো একটু বেশিই হয়ে গেছে মনে হয়! তবে আজকে তোমার Birthday, তাই এসব চলতেই পারে। 😂❤️ সত্যি বলতে, খুব বেশি কিছু না। শুধু চেয়েছিলাম, তোমার জন্মদিনে ছোট্ট একটা সারপ্রাইজ দিতে। জানি না তোমার কেমন লাগবে, তবে বানানোর সময় চেষ্টা করেছি যেন সবকিছু একটু আলাদা হয়। আর হ্যাঁ, সবকিছু নিজে নিজে হয় নাই, বেশ কিছু সময়ও গেছে এর পেছনে। তাই দেখে শেষ করার আগে পালিয়ে যেও না কিন্তু! 😭😂 যাই হোক, মজা বাদ দিলে, তোমার জন্য সত্যিই অনেক অনেক শুভকামনা। তোমার জীবনের সামনের দিনগুলো সুন্দর হোক, তোমার ইচ্ছাগুলো পূরণ হোক, আর সবসময় এমন কোনো না কোনো কারণ থাকুক, যার জন্য তুমি মন খুলে হাসতে পারো। নিজের যত্ন নিও, ভালো থেকো আর তোমার এই বিশেষ দিনটা অনেক আনন্দে কাটাও। 🎂💗 আর হ্যাঁ, Rose, এতক্ষণ ধরে ওয়েবসাইটটা দেখার পর অন্তত একটু হাসছো তো? নাকি এত আয়োজন দেখেও মুখে কোনো এক্সপ্রেশন নাই? 🙂😂 যদি একটুও হেসে থাকো, তাহলে আমার এই ওয়েবসাইট বানানো সার্থক। আর যদি একটু লজ্জাও পেয়ে থাকো, তাহলে তো কথাই নেই! 🤭❤️
+Once again, Happy Birthday, Rose! 🌹💗</p>
+<p class="final-flirty-text">আজকের দিনটা অনেক সুন্দর কাটুক। ভালো থেকো, হাসিখুশি থেকো, আর তোমার এই হাসিটা যেন সবসময় থাকে। ❤️🌹
+      </p>
+
+      <button id="btn-read-again" class="btn-romantic">
+        <span>আবার শুভেচ্ছাটা পড়ো ↻</span>
+      </button>
+
+      <footer class="footer-note">
+        ভালোবাসা, হাসি আর একটু রহস্য দিয়ে তৈরি 🌹
+      </footer>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       JAVASCRIPT: INTERACTION, PARTICLES & SOUND
+       ========================================================================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      // ------------------------------------------------------------------------
+      // 1. STATE & ELEMENT REFERENCES
+      // ------------------------------------------------------------------------
+      const openingScreen = document.getElementById('opening-screen');
+      const mainContainer = document.getElementById('main-container');
+      const btnOpenSurprise = document.getElementById('btn-open-surprise');
+      const diaryParagraphs = document.querySelectorAll('.diary-paragraph');
+      const btnSkipDiary = document.getElementById('btn-skip-diary');
+      const diarySection = document.getElementById('diary-section');
+
+      // Secret envelope elements
+      const btnUnseal = document.getElementById('btn-unseal');
+      const envelopeBox = document.getElementById('envelope-box');
+      const waxSeal = document.getElementById('wax-seal');
+      const secretRevealedText = document.getElementById('secret-revealed-text');
+
+      // Cake elements
+      const btnBlowCandle = document.getElementById('btn-blow-candle');
+      const candleFlame = document.getElementById('candle-flame');
+      const candleSmoke = document.getElementById('candle-smoke');
+      const wishBlessing = document.getElementById('wish-blessing');
+
+      // Final action
+      const btnReadAgain = document.getElementById('btn-read-again');
+      const btnCompliment = document.getElementById('btn-compliment');
+      const complimentMessage = document.getElementById('compliment-message');
+      const btnFinalSecret = document.getElementById('btn-final-secret');
+      const finalSecretMessage = document.getElementById('final-secret-message');
+
+      // Audio elements
+      const audioToggle = document.getElementById('audio-toggle');
+      const audioLabel = document.getElementById('audio-label');
+
+      let audioCtx = null;
+      let isMusicPlaying = false;
+      let melodyInterval = null;
+      let diaryRevealTimer = null;
+      let isDiaryFullyRevealed = true;
+      const diaryOriginalTexts = Array.from(diaryParagraphs, paragraph => paragraph.textContent);
+      // Show the complete birthday wish immediately; no line-by-line reveal or typing effect.
+      diaryParagraphs.forEach(paragraph => paragraph.classList.add('revealed'));
+      btnSkipDiary.style.display = 'none';
+      isDiaryFullyRevealed = true;
+      let complimentIndex = -1;
+      let isCandleBlown = false;
+
+      // ------------------------------------------------------------------------
+      // PAGE-BY-PAGE NAVIGATION: only one main section is visible at a time
+      // ------------------------------------------------------------------------
+      const pageSections = Array.from(mainContainer.querySelectorAll(':scope > section'));
+      const pageNames = ['Birthday Wish', 'Secret Letter', 'Funny Compliments', 'Birthday Cake', 'Final Surprise'];
+      const nextLabels = ['Open Secret Letter →', 'Get Compliments →', 'Make a Wish →', 'One Last Thing →'];
+      let currentPageIndex = 0;
+
+      pageSections.forEach((section, index) => {
+        section.classList.add('page-section');
+        section.classList.toggle('active', index === 0);
+        section.setAttribute('aria-hidden', index === 0 ? 'false' : 'true');
+
+        const nav = document.createElement('nav');
+        nav.className = 'page-nav';
+        nav.setAttribute('aria-label', 'Birthday surprise page navigation');
+
+        if (index > 0) {
+          const backButton = document.createElement('button');
+          backButton.type = 'button';
+          backButton.textContent = '← Previous';
+          backButton.addEventListener('click', () => showPage(index - 1));
+          nav.appendChild(backButton);
+        }
+
+        if (index < pageSections.length - 1) {
+          const nextButton = document.createElement('button');
+          nextButton.type = 'button';
+          nextButton.className = 'primary';
+          nextButton.textContent = nextLabels[index] || 'Next Surprise →';
+          nextButton.addEventListener('click', () => showPage(index + 1));
+          nav.appendChild(nextButton);
+        }
+
+        const counter = document.createElement('span');
+        counter.className = 'page-counter';
+        counter.textContent = `${index + 1} / ${pageSections.length} · ${pageNames[index]}`;
+        nav.appendChild(counter);
+        section.appendChild(nav);
+      });
+
+      function showPage(index) {
+        if (index < 0 || index >= pageSections.length) return;
+        currentPageIndex = index;
+        pageSections.forEach((section, i) => {
+          const active = i === index;
+          section.classList.toggle('active', active);
+          section.setAttribute('aria-hidden', active ? 'false' : 'true');
+        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // Music starts on the opening-screen click, as the birthday-wish page appears.
+      }
+
+      // ------------------------------------------------------------------------
+      // 2. CANVAS AMBIENT FLOATING PARTICLES (HEARTS & PETALS)
+      // ------------------------------------------------------------------------
+      const canvas = document.getElementById('ambient-canvas');
+      const ctx = canvas.getContext('2d');
+
+      let width = (canvas.width = window.innerWidth);
+      let height = (canvas.height = window.innerHeight);
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+
+      const PARTICLE_COUNT = window.innerWidth < 600 ? 24 : 45;
+      const particles = [];
+
+      class AmbientParticle {
+        constructor() {
+          this.reset(true);
+        }
+
+        reset(initial = false) {
+          this.x = Math.random() * width;
+          this.y = initial ? Math.random() * height : height + 20;
+          this.type = Math.random() > 0.45 ? 'heart' : 'petal';
+          this.size = Math.random() * (this.type === 'heart' ? 12 : 14) + 8;
+          this.speedY = Math.random() * 0.8 + 0.4;
+          this.speedX = (Math.random() - 0.5) * 0.6;
+          this.opacity = Math.random() * 0.45 + 0.2;
+          this.rotation = Math.random() * Math.PI * 2;
+          this.rotationSpeed = (Math.random() - 0.5) * 0.02;
+          this.oscillationSpeed = Math.random() * 0.02 + 0.01;
+          this.oscillationDistance = Math.random() * 20 + 10;
+          this.initialX = this.x;
+          this.counter = Math.random() * 100;
+        }
+
+        update() {
+          this.counter += this.oscillationSpeed;
+          this.y -= this.speedY;
+          this.x = this.initialX + Math.sin(this.counter) * this.oscillationDistance;
+          this.rotation += this.rotationSpeed;
+
+          if (this.y < -30 || this.x < -40 || this.x > width + 40) {
+            this.reset(false);
+          }
+        }
+
+        draw() {
+          ctx.save();
+          ctx.translate(this.x, this.y);
+          ctx.rotate(this.rotation);
+          ctx.globalAlpha = this.opacity;
+
+          if (this.type === 'heart') {
+            // Draw soft romantic heart
+            ctx.fillStyle = '#C72C58';
+            ctx.beginPath();
+            const topCurveHeight = this.size * 0.3;
+            ctx.moveTo(0, topCurveHeight);
+            ctx.bezierCurveTo(0, 0, -this.size / 2, 0, -this.size / 2, topCurveHeight);
+            ctx.bezierCurveTo(-this.size / 2, (this.size + topCurveHeight) / 2, 0, this.size, 0, this.size);
+            ctx.bezierCurveTo(0, this.size, this.size / 2, (this.size + topCurveHeight) / 2, this.size / 2, topCurveHeight);
+            ctx.bezierCurveTo(this.size / 2, 0, 0, 0, 0, topCurveHeight);
+            ctx.closePath();
+            ctx.fill();
+          } else {
+            // Draw soft rose petal
+            ctx.fillStyle = '#E24C73';
+            ctx.beginPath();
+            ctx.moveTo(0, -this.size * 0.6);
+            ctx.quadraticCurveTo(this.size * 0.6, -this.size * 0.2, this.size * 0.4, this.size * 0.6);
+            ctx.quadraticCurveTo(0, this.size * 0.8, -this.size * 0.4, this.size * 0.6);
+            ctx.quadraticCurveTo(-this.size * 0.6, -this.size * 0.2, 0, -this.size * 0.6);
+            ctx.closePath();
+            ctx.fill();
+          }
+
+          ctx.restore();
+        }
+      }
+
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        particles.push(new AmbientParticle());
+      }
+
+      let isPageActive = true;
+      document.addEventListener('visibilitychange', () => {
+        isPageActive = !document.hidden;
+      });
+
+      function renderAmbient() {
+        if (isPageActive) {
+          ctx.clearRect(0, 0, width, height);
+          for (let i = 0; i < particles.length; i++) {
+            particles[i].update();
+            particles[i].draw();
+          }
+        }
+        requestAnimationFrame(renderAmbient);
+      }
+      renderAmbient();
+
+      // ------------------------------------------------------------------------
+      // 3. CONFETTI & BURST PARTICLE SYSTEM (FOR CAKE & CELEBRATION)
+      // ------------------------------------------------------------------------
+      const confettiCanvas = document.getElementById('confetti-canvas');
+      const confettiCtx = confettiCanvas.getContext('2d');
+      let confettiWidth = (confettiCanvas.width = window.innerWidth);
+      let confettiHeight = (confettiCanvas.height = window.innerHeight);
+
+      window.addEventListener('resize', () => {
+        confettiWidth = confettiCanvas.width = window.innerWidth;
+        confettiHeight = confettiCanvas.height = window.innerHeight;
+      });
+
+      const confettiPieces = [];
+      const CONFETTI_COLORS = ['#C72C58', '#FF4081', '#FF80AB', '#FFD54F', '#8E2348', '#FFFFFF', '#E91E63'];
+
+      class ConfettiPiece {
+        constructor(originX, originY) {
+          this.x = originX;
+          this.y = originY;
+          this.size = Math.random() * 8 + 5;
+          const angle = Math.random() * Math.PI * 2;
+          const velocity = Math.random() * 8 + 4;
+          this.vx = Math.cos(angle) * velocity;
+          this.vy = Math.sin(angle) * velocity - 3;
+          this.color = CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)];
+          this.rotation = Math.random() * 360;
+          this.rotSpeed = (Math.random() - 0.5) * 8;
+          this.opacity = 1;
+          this.gravity = 0.22;
+          this.life = 0;
+          this.maxLife = Math.random() * 80 + 100;
+        }
+
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+          this.vy += this.gravity;
+          this.vx *= 0.98;
+          this.rotation += this.rotSpeed;
+          this.life++;
+          if (this.life > this.maxLife - 30) {
+            this.opacity = (this.maxLife - this.life) / 30;
+          }
+        }
+
+        draw() {
+          confettiCtx.save();
+          confettiCtx.translate(this.x, this.y);
+          confettiCtx.rotate((this.rotation * Math.PI) / 180);
+          confettiCtx.globalAlpha = Math.max(0, this.opacity);
+          confettiCtx.fillStyle = this.color;
+          confettiCtx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size * 0.6);
+          confettiCtx.restore();
+        }
+      }
+
+      function triggerCelebration(x, y, count = 75) {
+        for (let i = 0; i < count; i++) {
+          confettiPieces.push(new ConfettiPiece(x, y));
+        }
+      }
+
+      function renderConfetti() {
+        confettiCtx.clearRect(0, 0, confettiWidth, confettiHeight);
+        for (let i = confettiPieces.length - 1; i >= 0; i--) {
+          const piece = confettiPieces[i];
+          piece.update();
+          piece.draw();
+          if (piece.life >= piece.maxLife) {
+            confettiPieces.splice(i, 1);
+          }
+        }
+        requestAnimationFrame(renderConfetti);
+      }
+      renderConfetti();
+
+      // ------------------------------------------------------------------------
+      // 4. MUSIC ENGINE (STANDALONE WEB AUDIO API - 100% OFFLINE SAFE)
+      //    Synthesizes a soft, romantic music box / acoustic chime lullaby
+      // ------------------------------------------------------------------------
+      function initAudio() {
+        if (!audioCtx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) {
+            audioCtx = new AudioContext();
+          }
+        }
+        if (audioCtx && audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+      }
+
+      function playMusicBoxNote(freq, time, duration = 1.6) {
+        if (!audioCtx || audioCtx.state !== 'running') return;
+
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        // Bell / Music Box harmonic timbre (sine + gentle harmonics)
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, time);
+
+        // Soft bell envelope: fast attack, romantic gentle decay
+        gain.gain.setValueAtTime(0.0001, time);
+        gain.gain.exponentialRampToValueAtTime(0.12, time + 0.04);
+        gain.gain.exponentialRampToValueAtTime(0.0001, time + duration);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start(time);
+        osc.stop(time + duration);
+      }
+
+      // Romantic Melody Notes (Frequencies in Hz: C5, E5, G5, A5, B5, C6 etc.)
+      const melody = [
+        523.25, 659.25, 783.99, 880.00, 783.99, 659.25,
+        587.33, 698.46, 880.00, 987.77, 880.00, 698.46,
+        523.25, 659.25, 783.99, 1046.50, 987.77, 880.00,
+        783.99, 659.25, 587.33, 523.25
+      ];
+      let melodyIndex = 0;
+
+      function startMelodyLoop() {
+        if (melodyInterval) clearInterval(melodyInterval);
+        melodyIndex = 0;
+
+        melodyInterval = setInterval(() => {
+          if (!isMusicPlaying || !audioCtx) return;
+          const now = audioCtx.currentTime;
+          playMusicBoxNote(melody[melodyIndex], now);
+
+          // Subtle warm bass accompaniment note every 2 beats
+          if (melodyIndex % 3 === 0) {
+            playMusicBoxNote(melody[melodyIndex] / 2, now + 0.05, 2.2);
+          }
+
+          melodyIndex = (melodyIndex + 1) % melody.length;
+        }, 550);
+      }
+
+      function stopMelodyLoop() {
+        if (melodyInterval) {
+          clearInterval(melodyInterval);
+          melodyInterval = null;
+        }
+      }
+
+      function startMusic() {
+        initAudio();
+        if (isMusicPlaying) return;
+        isMusicPlaying = true;
+        audioToggle.classList.add('playing');
+        audioLabel.textContent = 'Pause Music ♫';
+        startMelodyLoop();
+      }
+
+      function stopMusic() {
+        isMusicPlaying = false;
+        audioToggle.classList.remove('playing');
+        audioLabel.textContent = 'Play Music ♫';
+        stopMelodyLoop();
+      }
+
+      audioToggle.addEventListener('click', () => {
+        if (isMusicPlaying) {
+          stopMusic();
+        } else {
+          startMusic();
+        }
+      });
+
+      // ------------------------------------------------------------------------
+      // 5. OPENING SCREEN TRANSITION
+      // ------------------------------------------------------------------------
+      btnOpenSurprise.addEventListener('click', () => {
+        // Trigger subtle celebration hearts
+        const rect = btnOpenSurprise.getBoundingClientRect();
+        triggerCelebration(rect.left + rect.width / 2, rect.top + rect.height / 2, 40);
+
+        // Smooth cinematic fade
+        openingScreen.classList.add('hidden');
+        mainContainer.classList.add('visible');
+        showPage(0);
+
+        // Start the soft romantic music on the first-to-second page transition.
+        // This click is a direct user gesture, so browsers allow audio playback.
+        startMusic();
+      });
+
+      // ------------------------------------------------------------------------
+      // 6. DIARY PARAGRAPH-BY-PARAGRAPH REVEAL & SKIP
+      // ------------------------------------------------------------------------
+      function startDiaryReveal() {
+        if (diaryRevealTimer || isDiaryFullyRevealed) return;
+        let paragraphIndex = 0;
+        let characterIndex = 0;
+        const typeDelay = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 5;
+
+        diaryParagraphs.forEach((paragraph, index) => {
+          paragraph.textContent = '';
+          paragraph.classList.remove('revealed');
+        });
+
+        function typeNextCharacter() {
+          if (paragraphIndex >= diaryParagraphs.length) {
+            diaryRevealTimer = null;
+            isDiaryFullyRevealed = true;
+            btnSkipDiary.style.display = 'none';
+            return;
+          }
+
+          const paragraph = diaryParagraphs[paragraphIndex];
+          const fullText = diaryOriginalTexts[paragraphIndex];
+          paragraph.classList.add('revealed');
+
+          if (typeDelay === 0) {
+            paragraph.textContent = fullText;
+            paragraphIndex++;
+            typeNextCharacter();
+            return;
+          }
+
+          paragraph.textContent = fullText.slice(0, characterIndex + 1);
+          characterIndex++;
+          if (characterIndex >= fullText.length) {
+            paragraphIndex++;
+            characterIndex = 0;
+          }
+          diaryRevealTimer = setTimeout(typeNextCharacter, typeDelay);
+        }
+
+        typeNextCharacter();
+      }
+
+      btnSkipDiary.addEventListener('click', () => {
+        if (diaryRevealTimer) clearTimeout(diaryRevealTimer);
+        diaryRevealTimer = null;
+        diaryParagraphs.forEach((paragraph, index) => {
+          paragraph.textContent = diaryOriginalTexts[index];
+          paragraph.classList.add('revealed');
+        });
+        btnSkipDiary.style.display = 'none';
+        isDiaryFullyRevealed = true;
+      });
+
+      // ------------------------------------------------------------------------
+      // 7. SECRET LETTER: WAX SEAL & ENVELOPE UNSEAL
+      // ------------------------------------------------------------------------
+      function unsealEnvelope() {
+        if (envelopeBox.classList.contains('opened')) return;
+
+        envelopeBox.classList.add('opened');
+        const boxRect = envelopeBox.getBoundingClientRect();
+        triggerCelebration(boxRect.left + boxRect.width / 2, boxRect.top + 80, 50);
+
+        // Play subtle paper chime
+        if (audioCtx && audioCtx.state === 'running') {
+          playMusicBoxNote(880, audioCtx.currentTime, 0.8);
+          playMusicBoxNote(1174.66, audioCtx.currentTime + 0.15, 1.2);
+        }
+
+        setTimeout(() => {
+          secretRevealedText.classList.add('active');
+          btnUnseal.style.display = 'none';
+        }, 650);
+      }
+
+      btnUnseal.addEventListener('click', unsealEnvelope);
+      waxSeal.addEventListener('click', unsealEnvelope);
+      waxSeal.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          unsealEnvelope();
+        }
+      });
+
+      // ------------------------------------------------------------------------
+      // 8. INTERACTIVE BIRTHDAY CAKE & BLOW OUT CANDLE
+      // ------------------------------------------------------------------------
+      btnBlowCandle.addEventListener('click', () => {
+        if (isCandleBlown) {
+          // Re-trigger celebratory burst if clicked again
+          const rect = btnBlowCandle.getBoundingClientRect();
+          triggerCelebration(rect.left + rect.width / 2, rect.top, 50);
+          return;
+        }
+
+        isCandleBlown = true;
+        candleFlame.classList.add('extinguished');
+        candleSmoke.classList.add('puff');
+
+        // Confetti explosion from candle position
+        const candleRect = candleFlame.getBoundingClientRect();
+        triggerCelebration(candleRect.left + candleRect.width / 2, candleRect.top, 100);
+
+        // Play gentle sparkling chime
+        if (audioCtx && audioCtx.state === 'running') {
+          const now = audioCtx.currentTime;
+          playMusicBoxNote(659.25, now, 0.8);
+          playMusicBoxNote(783.99, now + 0.12, 1.0);
+          playMusicBoxNote(1046.50, now + 0.24, 1.4);
+          playMusicBoxNote(1318.51, now + 0.36, 1.8);
+        }
+
+        setTimeout(() => {
+          wishBlessing.style.display = 'block';
+          btnBlowCandle.innerHTML = '<span>May Your Wish Come True! 💗</span>';
+        }, 500);
+      });
+
+      // ------------------------------------------------------------------------
+      // 9. FUNNY COMPLIMENT GENERATOR & FINAL SECRET REVEAL
+      // ------------------------------------------------------------------------
+      const compliments = [
+        'আজকে তোমার ভাবও জন্মদিনের ছাড় পাবে! 😭🎀',
+        'Rose নামটা ফুলের, কিন্তু আজকের জন্মদিনে তুমি একেবারে গল্পের প্রধান চরিত্র! 🌹✨',
+        'তোমার হাসির জন্য আলাদা একটা warning label থাকা উচিত—অকারণে mood ভালো করে দিতে পারে। 😂💗',
+        'আজকে কেকের মোমবাতি গুনবে না, প্রশংসা গুনবে। কেক কম পড়লে সেটাও একটা সমস্যা। 🎂😌',
+        'তোমাকে নিয়ে গবেষণা চলছে… প্রাথমিক ফলাফল: জন্মদিনের মেয়েটি সন্দেহজনক রকমের মিষ্টি। 🔬🌚',
+        'আজকের সরকারি নিয়ম: Rose যা বলবে, জন্মদিনের আইন অনুযায়ী তা অন্তত ২৪ ঘণ্টা কার্যকর! 👑😂',
+        'তুমি ফুল হলে গোলাপ, ইমোজি হলে 🌹, আর জন্মদিনের আমেজ হলে—একদম বিশেষ। 💗',
+        'তোমার নাম Rose, তাই কি কথার মাঝেও অকারণে ফুলের কথা মনে পড়ে? গবেষণা চলছে। 🌹🧐',
+        'তোমার birthday আজ, কিন্তু celebration-এর অজুহাত খুঁজছিলাম অনেক আগে থেকেই। 👀🎉',
+        'তুমি online এলে notification না এলেও মন বলে—ওহ, interesting! 😂📱',
+        'তোমার vibe এমন—একটু mysterious, একটু cute, আর পুরোটা নিয়ে প্রশ্ন করা নিষেধ। 🌚💗',
+        'তুমি যদি একটা subject হতে, তাহলে নাম হতো Advanced Cutology. পাশ করা কঠিন! 😭📚',
+        'আজকে তোমার সব ভুল মাফ। তবে কেকের শেষ টুকরাটা একা খেলে আপিল করা যাবে। 🎂⚖️',
+        'Rose-এর birthday বলে আজ গোলাপ ফুলও একটু competition অনুভব করছে। 🌹🏆',
+        'তোমার হাসি হয়তো free, কিন্তু সেটা দেখে mood ভালো হওয়া premium feature. ✨😂',
+        'তোমার birthday wish লিখতে গিয়ে শব্দের চেয়ে emoji-ই বেশি helpful হয়ে গেল। 😭❤️',
+        'তুমি নিশ্চয়ই birthday girl, কারণ আজকের সব spotlight তোমার দিকেই যেতে চাইছে। 🎀✨',
+        'তোমার নামের সঙ্গে rose emoji এত মানায় যে emoji-টারও আত্মবিশ্বাস বেড়ে গেছে। 🌹😌',
+        'তোমার personality সম্পর্কে data কম, কিন্তু curiosity-র graph বেশ উঁচু। 📈👀',
+        'তোমাকে compliment দিতে গেলে সাবধান থাকতে হয়—একটার পর একটা মাথায় চলে আসে। 😂💗',
+        'আজকে তুমি officially ১০০% birthday queen, আর extra attitude-এর জন্য কোনো fee নেই। 👑🎂',
+        'তোমার সঙ্গে কথা কম হলেও birthday wish-এ effort কিন্তু full marks পাওয়ার চেষ্টা করছে। 📝🌹',
+        'তুমি যদি notification হতে, তাহলে “Ignore” অপশনটা কেউ খুঁজত না—তাত্ত্বিকভাবে। 🌚📲',
+        'আজকের আবহাওয়া রিপোর্ট: Rose-এর birthday উপলক্ষে চারদিকে cuteness-এর সম্ভাবনা ১০০%। 🌤️💗',
+        'তোমার নাম Rose, তাই আজকে তোমার জন্য গোলাপি রঙও extra সুন্দর লাগছে। 🎀🌹',
+        'কেউ বলে birthday-তে wish চাই, আর তুমি পাচ্ছ পুরো একটা ওয়েবসাইট। একটু বেশি হয়ে গেল নাকি? 😂💻',
+        'তুমি নিশ্চয়ই জানো না, তোমার birthday উপলক্ষে HTML-ও আজ extra সুন্দর হওয়ার চেষ্টা করছে। 💻✨',
+        'তোমার জন্য শুভকামনা এত বেশি যে এক মেসেজে ধরাতে গেলে internet-ও একটু বিশ্রাম চাইবে। 💌😂',
+        'তুমি একটা mystery box-এর মতো—খুলে দেখার কৌতূহল আছে, কিন্তু spoiler দেওয়া যাবে না। 🎁👀',
+        'তোমার birthday cake-এ candles কম হতে পারে, কিন্তু আজকের compliments-এর supply unlimited! 🎂♾️',
+        'আজকে তুমি যতটা সুন্দর দিন deserve করো, তার চেয়েও সুন্দর কিছু মুহূর্ত আসুক। 🌸❤️',
+        'তোমার নামটা flower, আর তোমার birthday wish-টা একটু extra effort-এর ফল। coincidence? 🌹🤨',
+        'তুমি যদি একটা season হতে, তাহলে probably spring—কারণ তোমার নামে ফুলের vibe আছে। 🌷🌼',
+        'আজকে তোমার কাজ শুধু হাসা, কেক খাওয়া আর এই ওয়েবসাইট বানানো মানুষটার effort rate করা। 😭⭐',
+        'তোমার birthday-তে একটা সত্যি কথা: আজকে তোমার দিন, তাই main character energy পুরোপুরি allowed! 🎬👑',
+        'এই compliment generator-এর শেষ নেই, কিন্তু তোমার birthday একটাই—তাই দিনটা জমিয়ে উপভোগ করো! 🎉💗',
+        'Rose, তোমার দিনটা হোক গোলাপের মতো সুন্দর আর surprise-এ ভরা—এইটুকু কিন্তু একদম sincere. 🌹❤️',
+        'আজকে তোমার birthday বলে universe-ও একটু extra sparkle দিয়ে রেখেছে মনে হচ্ছে। ✨🌹',
+        'তোমার নাম Rose, তাই তোমার জন্য compliment-গুলোও ফুলের তোড়ার মতো আসছে। 💐😂',
+        'তুমি হাসলে background music ছাড়াই sceneটা cinematic হয়ে যায়। 🎬💗',
+        'আজকে তোমার birthday crown invisible হতে পারে, কিন্তু main character status একদম visible। 👑',
+        'তোমার birthday plan-এ cake, photos আর এই website—triple threat! 🎂📸',
+        'তোমার জন্য compliment বানাতে গিয়ে আমার keyboard-ও creative হয়ে গেছে। ⌨️🌹',
+        'Rose-এর birthday-তে roses-দেরও মনে হয় attendance দিতে হবে। 🌹📝',
+        'আজকে তোমার smile-এর জন্য কোনো filter লাগবে না—birthday glow is included. ✨📸',
+        'তোমার birthday-তে আজকের একমাত্র deadline: নিজের দিনটা enjoy করা। 🎉💗',
+        'তুমি যদি একটা notification হতে, তাহলে সেটা definitely “worth opening”. 👀📱',
+        'এই compliment-এর accuracy যাচাই করতে independent research team দরকার। আমি volunteer না-ও হতে পারি। 😂🔬',
+        'Rose, তোমার birthday-তে আজকে সব ছোটখাটো problem-কে “come back tomorrow” বলা যায়। 🌚🎂',
+        'তোমার vibe-এ একটু mystery আছে—তাই এই website-এ secret page রাখা scientifically necessary ছিল। 🕵️‍♀️💌',
+        'তোমার birthday wish পড়তে এসে যদি হাসো, তাহলে developer হিসেবে আমার imaginary award প্রাপ্য। 🏆😭',
+        'আজকে তোমার cake-এর calories birthday magic দিয়ে গণনা হবে না। Enjoy responsibly-ish. 🎂😂',
+        'তোমার জন্য আজকে rose petals পড়ছে—আসলে animation, কিন্তু feelingটা genuine. 🌹✨',
+        'তোমার birthday-তে universe বলেছে: “Make room for more happy memories.” 🌙💗',
+        'তুমি যদি একটা book হতে, title হতো “A Little Mystery Called Rose.” 📖🌹',
+        'তোমার birthday-তে আজকে extra cute হওয়া officially permitted. কোনো appeal চলবে না। 🎀⚖️',
+        'এই website-এর effort level দেখে একটা star দিলে আমি সেটা humble ভাবে গ্রহণ করব। ⭐😂',
+        'তোমার নাম শুনলেই rose emoji নিজে থেকেই type হতে চায়—keyboard-এরও preference আছে। 🌹⌨️',
+        'আজকের forecast: ৯৯% birthday joy, ১% cake crumbs, ১০০% ভালো স্মৃতির সম্ভাবনা। 🌤️🎂',
+        'তোমার জন্য wish করতে গিয়ে বুঝলাম, short message-এর চেয়ে একটু creative হওয়াও মন্দ না। 💌',
+        'তোমার birthday-তে আজকে “being effortlessly lovely” তোমার official job description. 🌸',
+        'তুমি একটা surprise হলে, spoiler না জেনেই খুলে দেখার ইচ্ছা হতো। 🎁👀',
+        'Rose, তোমার birthday playlist-এ আজকে happiness repeat mode-এ থাকুক। 🎶💗',
+        'তোমার জন্য ভালো কিছু কামনা করতে কোনো special effect লাগে না—তবুও confetti যোগ করা হলো। 🎉',
+        'আজকে তোমার smile-এর rating দিতে গেলে star limit বাড়াতে হবে। ⭐🌹',
+        'এই complimentটা একটু cheesy, কিন্তু birthday-তে cheese-এরও একটা জায়গা আছে। 🧀😂',
+        'তোমার birthday-তে আজকে পৃথিবীটা একটু বেশি pink দেখালে দোষ আমার না। 🎀🌍',
+        'তোমার নাম Rose—তাই তোমার birthday wish-এ ফুলের reference না থাকলে সেটা incomplete হতো। 🌹',
+        'আজকের জন্য তোমার only mission: cake enjoy করা আর অন্তত একটা সুন্দর memory বানানো। 💗',
+        'তোমার birthday-র জন্য এই little website বানানো হয়েছে—কারণ copy-paste wish ছিল too mainstream. 💻✨',
+        'তুমি যদি একটি emoji হতে, তাহলে probably 🌹—simple, pretty, and impossible to miss.',
+        'আজকে তোমার mood যেন pink skies আর soft music-এর মতো শান্ত আর সুন্দর হয়। 🌅🎶',
+        'Birthday girl status unlocked. Bonus feature: unlimited compliments. 🎮🎀',
+        'তোমার জন্য আজকে virtual flowers, real wishes, আর একগাদা silly compliments. 💐😂',
+        'এই compliment-টা save করে রাখো; পরের birthday-তে নতুন version release হবে। 😭💗',
+        'Rose, may your day be full of tiny surprises, loud laughs, and the kind of happiness that stays. 🌹❤️',
+        'Your smile deserves its own little spotlight today. No stage required. ✨',
+        'Official birthday report: you are allowed to be extra fabulous today. 👑🎂',
+        'If birthdays had a “most likely to make the day prettier” award, you would be nominated. 🌸',
+        'You bring enough main-character energy to make this whole website feel justified. 🎬😂',
+        'This compliment has been reviewed by absolutely no experts—and still feels pretty accurate. 🔬🌹',
+        'May your cake be sweet, your photos turn out perfect, and your worries take the day off. 🎂📸',
+        'You are not getting older today; you are just unlocking another level. 🎮💗',
+        'Rose, I hope today gives you at least one reason to smile that you did not see coming. 💌',
+        'A little birthday sparkle looks good on you. Then again, what does not? ✨😌',
+        'If good wishes were rose petals, your room would be impossible to walk through today. 🌹🌹',
+        'You deserve a day that feels like your favourite song playing at exactly the right moment. 🎶',
+        'Today’s special offer: unlimited happiness, extra cake, and zero need to act normal. 😂🎀',
+        'You are officially the reason this page has more roses than a florist’s shop. 🌹💻',
+        'Birthday girl, please accept this compliment before it gets any more dramatic. 👀❤️',
+        'The birthday glow is real; the scientific evidence is still pending. ✨🔬',
+        'Hope your next chapter is full of lovely people, unexpected wins, and beautiful little moments. 📖💗',
+        'If your day were a colour palette, it would be blush pink, rose red, and a little bit of magic. 🎨🌹',
+        'Your birthday deserves a little extra effort—and this website is Exhibit A. 😂💌',
+        'May your happiness today be contagious, your cake plentiful, and your camera storage sufficient. 🎂📱',
+        'Rose, keep blooming at your own pace. Even the prettiest flowers do not rush. 🌹❤️'
+      ];
+
+      btnCompliment.addEventListener('click', () => {
+        let nextIndex = Math.floor(Math.random() * compliments.length);
+        if (compliments.length > 1 && nextIndex === complimentIndex) {
+          nextIndex = (nextIndex + 1) % compliments.length;
+        }
+        complimentIndex = nextIndex;
+        complimentMessage.classList.remove('pop');
+        // Restart the CSS animation reliably after each tap.
+        void complimentMessage.offsetWidth;
+        complimentMessage.textContent = compliments[complimentIndex];
+        complimentMessage.classList.add('pop');
+        const rect = btnCompliment.getBoundingClientRect();
+        triggerCelebration(rect.left + rect.width / 2, rect.top, 18);
+      });
+
+      btnFinalSecret.addEventListener('click', () => {
+        finalSecretMessage.hidden = false;
+        btnFinalSecret.querySelector('span').textContent = 'গোপন কথাটি জানা হলো 💌';
+        btnFinalSecret.disabled = true;
+        const rect = btnFinalSecret.getBoundingClientRect();
+        triggerCelebration(rect.left + rect.width / 2, rect.top, 55);
+      });
+
+      // ------------------------------------------------------------------------
+      // 10. READ AGAIN: SMOOTH NAVIGATION
+      // ------------------------------------------------------------------------
+      btnReadAgain.addEventListener('click', () => {
+        showPage(0);
+
+        // Trigger celebratory heart drift
+        const rect = btnReadAgain.getBoundingClientRect();
+        triggerCelebration(rect.left + rect.width / 2, rect.top, 30);
+      });
+
+    })();
+  </script>
+</body>
+</html>
